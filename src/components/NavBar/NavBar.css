@@ -22,7 +22,6 @@ nav {
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #E4E5E6, #00416A);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    position: fixed;
     top: 0;
     z-index: 100;
     transition: ease-in-out 0.5s;
@@ -37,8 +36,12 @@ nav {
 }
 
 .nav .enlaces-header a {
-    color: #fff;
+    color: rgb(245, 245, 245);
     text-decoration: none;
     margin-left: 50px;
     font-size: 20px;
+}
+
+.carrito{
+    width: 50px;
 }
