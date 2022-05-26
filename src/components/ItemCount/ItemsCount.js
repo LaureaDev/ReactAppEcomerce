@@ -1,21 +1,33 @@
 import { useState } from "react"
 import Button from 'react-bootstrap/button'
-const ItemCount = () =>{
-
-   const [count, setCount] = useState(0)
-   const decrement =  () =>{
-      setCount(count -1)
-   }
-   const increment = () =>{
-       setCount(count + 1)
-   }
-   
-   
+import Alert from 'react-bootstrap/Alert'
+function ItemCount({stock}) {
+    const [count, setCount] = useState(0);
+        function adding () {
+            if( count < stock) {
+                setCount(count + 1)
+            }
+        }
+        function subs () {
+            if(count > 0) {
+                setCount(count - 1)
+            }
+        } 
+         function onAdd () {
+                <Alert variant="success">
+                <Alert.Heading>Hey, nice {count} to see you </Alert.Heading>
+                    <hr />
+                    <p className="mb-0"></p>
+                </Alert>
+        } 
     return (
-        <div className="botones">
-            <Button onClick={increment} variant="outline-success">Sumar</Button>
-            <h1>{count}</h1>
-            <Button onClick={decrement} variant="outline-danger">Restar</Button>
+        <div>
+            <div>
+                <Button onClick={adding} variant="success">+</Button>
+                <p>{count}</p>
+                <Button onClick={subs} variant="danger">-</Button>
+            </div>
+                <Button onClick={onAdd} variant="primary">Comprar</Button>
         </div>
     )
 

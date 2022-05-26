@@ -3,7 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import ItemListConteiner from './components/ItemListConteiner/ItemListConteiner';
 //import CartWidget from './components/CartWidget/CartWidget';
-import ItemCount from './components/ItemCount/ItemsCount';
+
 
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
     <div className="App">
       <NavBar/>
       <formControl/>
-      <ItemListConteiner greeting="LN Electronic" />
-      <ItemCount/>
+      <ItemListConteiner/>
+
     </div>
   );
 }

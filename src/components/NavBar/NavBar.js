@@ -1,29 +1,42 @@
 import './NavBar.css'
 import React from 'react'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/formControl'
 import CartWidget from '../CartWidget/CartWidget'
+
 
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div>
-            <img className='logo' src='./imagenes/company.png'></img>
-          </div>
-        <div className="container-fluid">
-            <div className="container px-4 px-lg-5">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"><span
-                        className="navbar-toggler-icon"></span></button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li className="nav-item"><a className="nav-link" >HOME</a></li>
-                        <li className="nav-item"><a className="nav-link">SHOP</a></li>
-                        <li className="nav-item"><a className="nav-link">PRODUCTOS</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <Navbar bg="light" expand="lg">
+  <Container fluid>
+  <CartWidget/>
+    <Navbar.Brand href="#">Catalogo</Navbar.Brand>
+    <Navbar.Toggle aria-controls="navbarScroll" />
+    <Navbar.Collapse id="navbarScroll">
+      <Nav
+        className="me-auto my-2 my-lg-0"
+        style={{ maxHeight: '100px' }}
+        navbarScroll >
+        <Nav.Link href="#">Productos</Nav.Link>
+        <Nav.Link href="#">Marcas</Nav.Link>
+        <Nav.Link href="#">Componentes</Nav.Link>
+      </Nav>
+      <Form className="d-flex">
+        <FormControl
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+        />
+        <Button variant="outline-success">Search</Button>
+      </Form>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
 )
 }
 
