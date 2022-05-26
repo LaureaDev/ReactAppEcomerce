@@ -22,7 +22,7 @@ function ItemCount({stock}) {
         } 
     return (
         <div>
-            <div>
+            <div className="btn-Count">
                 <Button onClick={adding} variant="success">+</Button>
                 <p>{count}</p>
                 <Button onClick={subs} variant="danger">-</Button>

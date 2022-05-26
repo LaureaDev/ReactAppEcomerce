@@ -27,7 +27,23 @@
 .App-link {
   color: #61dafb;
 }
+.btn-primary{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
+.card-img{
+  width: 75%;
+  margin: auto;
+  padding: 2px;
+}
+.btn-Count{
+  display: inline-flex;
+  margin: 25px;
+  font-size: 20px;
+  font-weight: 400;
+
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
