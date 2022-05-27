@@ -9,7 +9,7 @@ function Items({img, name, id, price, stock }) {
   <Card.Body>
     <Card.Title>{name}</Card.Title>
     <Card.Text>
-      {price}
+       $ {price}
     </Card.Text>
   </Card.Body>
   <ItemCount stock={stock}/>
