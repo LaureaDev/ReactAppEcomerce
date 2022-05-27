@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/formControl'
 import CartWidget from '../CartWidget/CartWidget'
 
 
@@ -26,7 +25,7 @@ function NavBar() {
         <Nav.Link href="#">Componentes</Nav.Link>
       </Nav>
       <Form className="d-flex">
-        <FormControl
+      <Form.Control
           type="search"
           placeholder="Search"
           className="me-2"
