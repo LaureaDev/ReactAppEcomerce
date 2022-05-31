@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import products from "../../asyncmock";
-import customFetch from "../CustomFetch";
+import {getProducts} from "../../asyncmock";
 import ItemList from "../ItemList";
 import style from "./ItemListContainer.module.css"
 
-const ItemListConteiner = () => {
+const ItemDetailConteiner = () => {
     const [Items, setItems] = useState ([]);
     
     useEffect(() =>{
-        customFetch(2000, products)
+        getProducts()
         .then(resultado => setItems(resultado))
     }, [Items])
-    console.log(Items)
+   
     
     return (
         
@@ -22,4 +21,4 @@ const ItemListConteiner = () => {
 
 }
 
-export default ItemListConteiner;
+export default ItemDetailConteiner;

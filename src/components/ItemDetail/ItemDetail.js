@@ -1,10 +1,11 @@
 import './ItemDetail.css'
 
-const ItemDetail = ({title}) => {
+const ItemDetail = ({name, price}) => {
     return(
         <div>
             <h1>ItemDetail</h1>
-            <h2>{title}</h2>
+            <h2>{name}</h2>
+            <p>${price}</p>
         </div>
         
     )
