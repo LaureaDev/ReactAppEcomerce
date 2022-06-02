@@ -1,10 +1,10 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import ItemCount from './ItemCount/ItemsCount'
-
-function Items({img, name, id, price, stock }) {
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap'
+function Items({img, name, id, price }) {
   return (
-    <Card key={id} style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem' }}>
   <Card.Img className='card-img' variant="top" src={img} />
   <Card.Body>
     <Card.Title>{name}</Card.Title>
@@ -12,7 +12,10 @@ function Items({img, name, id, price, stock }) {
        $ {price}
     </Card.Text>
   </Card.Body>
-  <ItemCount stock={stock}/>
+  <div>
+  <Link to={`/detail/${id}`} className='BTN'> Ver detalles</Link>
+
+  </div>
 </Card>
   )
 }

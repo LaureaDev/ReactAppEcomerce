@@ -12,6 +12,7 @@ function ItemList ({products}) {
                 stock={p.stock}
             />
         ))
+        
     )
 }
 export default ItemList;

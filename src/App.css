@@ -31,19 +31,42 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.BTN{
+    margin: 28px 0 0 0;
+    width: 130px;
+    
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    background: #1fde82;
+    color: #fff;
+    padding: 12px 0;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(31, 222, 130, .46);
+}
+.BTN:hover{
+  color: #fff;
+}
+
+.greeting{
+  display: flex;
+  position:static;
+  margin: auto;
+}
 
 .card-img{
   width: 75%;
+  display: flex;
+  justify-content: space-between;
   margin: auto;
   padding: 2px;
 }
-.btn-Count{
-  display: inline-flex;
-  margin: 25px;
-  font-size: 20px;
-  font-weight: 400;
 
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
