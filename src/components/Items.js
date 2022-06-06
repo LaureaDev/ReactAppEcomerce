@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
-import Button from 'react-bootstrap'
 function Items({img, name, id, price }) {
   return (
     <Card style={{ width: '18rem' }}>
@@ -14,7 +13,6 @@ function Items({img, name, id, price }) {
   </Card.Body>
   <div>
   <Link to={`/detail/${id}`} className='BTN'> Ver detalles</Link>
-
   </div>
 </Card>
   )
