@@ -11,9 +11,8 @@ function ItemList ({products}) {
                 price={p.price}
                 stock={p.stock}
                 id={p.id}
-            />
+            /> 
         ))
-        
     )
-}
+} 
 export default ItemList;
