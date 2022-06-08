@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
+
 function ItemCount({stock}) {
     const [count, setCount] = useState(0);
         function adding () {
