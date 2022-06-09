@@ -48,7 +48,7 @@ const products = [
         stock: 10,
     },
     {
-        id: 8,
+        id: 7,
         name: 'Disco Solido SSD M.2 WD 2TB Black SN850 7000MB/s NVMe PCIe Gen4',
         price: 75000,
         category: 'DiscoSSD',

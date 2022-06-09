@@ -3,15 +3,22 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
+
 import CartWidget from '../CartWidget/CartWidget'
 import { Link } from 'react-router-dom'
+
 function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
   <Container fluid>
-  <CartWidget/>
+      <div className='titulo'>
+          <p> Ecommerce</p>
+            <ul>
+                <li>Computadoras</li>
+                <li>Accesorios</li>
+                <li> Y más ...</li>
+            </ul>
+      </div>
     <Navbar.Toggle aria-controls="navbarScroll" />
     <Navbar.Collapse id="navbarScroll">
       <Nav
@@ -20,22 +27,13 @@ function NavBar() {
         navbarScroll >
         
             <Link to='/' className='Links'>Home</Link>
-            <Link to='/category/MemoriaRam' className='Links' >Memoria RAM</Link>
-            <Link to='/category/PlacaVideo' className='Links' >Placa de Video</Link>
+            <Link to='/category/MemoriaRam' className='Links' >Memorias</Link>
+            <Link to='/category/PlacaVideo' className='Links' >Placas</Link>
             <Link to='/category/Procesador' className='Links' >Procesadores</Link>
             <Link to='/category/DiscoSSD' className='Links' >Discos</Link>
-        
       </Nav>
       
-      <Form className="d-flex">
-      <Form.Control
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
+     <CartWidget />
     </Navbar.Collapse>
   </Container>
 </Navbar>

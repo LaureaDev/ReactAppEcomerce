@@ -1,3 +1,12 @@
+:root{
+ --color-price: #EFBC75;
+ --color-text:#718163;
+ --color-text-dark: #148D8D;
+ --color-text-dark2: #1A4A5A;
+ --color-text-dark3: #0E2C40 ;
+}
+
+
 .App {
   text-align: center;
 }
@@ -53,13 +62,8 @@
   color: #fff;
 }
 
-.greeting{
-  display: flex;
-  position:static;
-  margin: auto;
-}
 
-.card-img{
+.card-img-top{
   width: 75%;
   display: flex;
   justify-content: space-between;

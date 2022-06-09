@@ -15,12 +15,10 @@
     height: 120px;
     border-bottom: 1px solid transparent;
     box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .9);
-    background: #076585;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #fff, #076585);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #fff, #076585); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
-    top: 0;
-    z-index: 100;
-    transition: ease-in-out 0.5s;
+    background: #2BC0E4;  
+    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4); 
+    background: linear-gradient(to right, #EAECC6, #2BC0E4); 
+
     
 }
 .logo{
@@ -30,12 +28,57 @@
 
 
 .Links { 
+    margin-left: 25px;
     text-decoration: none;
     font-size: 26px;
-    color: #076585;
+    color: var(--color-text-dark);
     padding: 20px;
 }
-.Category{
-    display:flex;
-    text-decoration: none;
+.Links:hover{
+    color: var(--color-text-dark2);
+}
+
+.titulo{
+    
+    display: flex;
+    width: 210px;
+    height: 40px;
+    color: var(--color-text-dark);
+    font-size: 40px;
+    line-height: 30px;
+
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    overflow: hidden;
+  
+    cursor: pointer;
+}
+ul{
+    list-style: none;
+    padding-left: 10px;
+    animation: cambiar 3s infinite;
+}
+
+ul, p {
+    margin: 0;
+}
+
+@keyframes cambiar{
+    0%{margin-top: 0;}
+    20%{margin-top: 0;}
+
+    25%{margin-top: -40px;}
+    50%{margin-top: 40px;}
+ 
+    55%{margin-top: -80px;}
+    80%{margin-top: -80px;}
+
+    85%{margin-top: -40px;}
+    95%{margin-top: -40px;}
+
+    100%{margin-top: 0;}
 }

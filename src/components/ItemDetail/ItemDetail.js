@@ -1,8 +1,9 @@
 import './ItemDetail.css'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link } from 'react-router-dom'
+import  CartContext  from '../../context/CartContext'
 
 
 const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
@@ -30,22 +31,26 @@ const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
     )
 }
 
-const ItemDetail = ({ img, name, price, stock }) => {
+const ItemDetail = ({ id, img, name, price, stock}) => {
     const [quantity, setQuantity] = useState(0)
 
-    const onAdd = (count) => {
+    const { addItem } = useContext(CartContext)
+
+    
+    const onAdd = (quantity) => {
         console.log('Agregar al carrito')
-        setQuantity(count)
+        console.log(quantity)
+        setQuantity(quantity)
+        addItem({id, name, price, quantity})
     }
     
-
     return(
-        <div className='CardItem'>
+        <div className='CardItem2'>
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={img}/>
+            <Card.Img className='CardImg'src={img}/>
             <Card.Body>
                 <Card.Title>ItemDetail</Card.Title>
-                    <Card.Text className='cate'>
+                    <Card.Text className='CardTitle'>
                      {name}
                      </Card.Text>
                      <Card.Text className='price'>
