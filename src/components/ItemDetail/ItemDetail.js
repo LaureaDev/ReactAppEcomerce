@@ -22,7 +22,7 @@ const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
     }
 
     return (
-        <div>
+        <div className='BtnContador'>
             <p className='cantidad'>{count}</p>
             <Button variant="danger" onClick={decrement}>-</Button>
             <Button variant="success" onClick={increment}>+</Button>
@@ -38,8 +38,6 @@ const ItemDetail = ({ id, img, name, price, stock}) => {
 
     
     const onAdd = (quantity) => {
-        console.log('Agregar al carrito')
-        console.log(quantity)
         setQuantity(quantity)
         addItem({id, name, price, quantity})
     }
@@ -56,7 +54,10 @@ const ItemDetail = ({ id, img, name, price, stock}) => {
                      <Card.Text className='price'>
                         ${price}
                     </Card.Text>
-                    { quantity > 0 ? <Link to='/cart' className='BTN'> Finalizar </Link> : <ButtonCount stock={stock} onConfirm={onAdd}/>}
+                    { quantity > 0 
+                     ? <Link to='/cart' className='BTN'> Finalizar </Link>
+                     : <ButtonCount stock={stock} onConfirm={onAdd}/>}
+
             </Card.Body>
         </Card>
         </div>

@@ -26,16 +26,6 @@ const ItemListConteiner = () => {
             setProducts(products)
         })
         
-            
-      
-
-/*         if(!categoryId){     
-        getProducts().then(resultado => setItems(resultado))
-    }else {
-        getProductsByCategory(categoryId).then(response => {
-            setItems(response)
-        })
-    } */
    }, [categoryId]) 
    
     

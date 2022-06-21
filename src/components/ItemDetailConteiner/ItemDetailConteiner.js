@@ -15,9 +15,6 @@ const ItemDetailConteiner = ( ) => {
    const product = { id: response.id, ...response.data()}
         setProduct(product)
 })
-        /* getProductsById(parseInt (productosId)).then(product => {
-            setProduct(product)
-        }) */
     }, [productosId])
 
     return(

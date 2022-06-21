@@ -4,6 +4,7 @@
  --color-text-dark: #148D8D;
  --color-text-dark2: #1A4A5A;
  --color-text-dark3: #0E2C40 ;
+ --font-text: 'Rajdhani', sans-serif;
 }
 
 
@@ -61,7 +62,11 @@
 .BTN:hover{
   color: #fff;
 }
-
+.CartWidget{
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+}
 
 .card-img-top{
   width: 75%;

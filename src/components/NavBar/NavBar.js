@@ -3,11 +3,18 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
-
+import { useContext } from 'react'
+import CartContext from '../../context/CartContext'
 import CartWidget from '../CartWidget/CartWidget'
 import { Link } from 'react-router-dom'
 
 function NavBar() {
+
+  const { getQuantity } = useContext(CartContext)
+
+  const quantity = getQuantity()
+
+
   return (
     <Navbar bg="light" expand="lg">
   <Container fluid>
@@ -32,8 +39,7 @@ function NavBar() {
             <Link to='/category/Procesador' className='Links' >Procesadores</Link>
             <Link to='/category/DiscoSSD' className='Links' >Discos</Link>
       </Nav>
-      
-     <CartWidget />
+      {quantity > 0 && <CartWidget />}
     </Navbar.Collapse>
   </Container>
 </Navbar>
