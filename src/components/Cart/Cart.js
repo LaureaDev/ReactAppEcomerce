@@ -2,35 +2,70 @@ import { useContext } from "react"
 import CartContext from '../../context/CartContext'
 import CartItem from '../CartItem/CartItem'
 import './Cart.css'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
 import { db } from "../../services/firebase"
 import Button from "react-bootstrap/esm/Button"
+import { useNotification } from '../../context/Notification'
+
 
 const Cart = () => {
-    const { cart, getQuantity, getTotal } = useContext(CartContext)  
+    const { cart, getQuantity, getTotal, removeItem, order } = useContext(CartContext)  
+
+    const { notify } = useNotification()
 
     const createOrden = () => {
-        console.log(' orden creada')
-    
-    const objetoOrden = {
-        comprador: {
-            nombre: 'Juan',
-            apellido: 'Perez',
-            email: 'juanperez@gmail.com',
-            direccion: 'Calle falsa 123',
-            telefono: '123456789',
-            dni: '12345678'
-        }, 
-        items: cart,
-        total: getTotal()
-    }
+        
+        notify('Orden creada con Éxito')
+        const objetoOrden = {
+            buyer: order,
+            items: cart ,
+            total: getTotal()
+        }
+        
     console.log(objetoOrden)
 
-    const collectionRef = collection(db, 'ordenes')
+    const ids = cart.map(prod => prod.id)
+    
+    const batch = writeBatch (db)
 
-    addDoc (collectionRef, objetoOrden).then(({id}) => {
-        console.log(`Se creo la orden con el ${id}`)
-    })
+    const OfStock = []
+
+    const collectionRef = collection(db, 'products')
+
+    getDocs(query(collectionRef, where(documentId(), 'in', ids)))
+        .then(response => {
+            response.docs.forEach(doc => {
+                const dataDoc = doc.data()
+                const prodQuantity = cart.find(prod => prod.id === doc.id)?.quantity
+
+                if( dataDoc.stock >= prodQuantity ){
+                    batch.update(doc.ref, { stock: dataDoc.stock - prodQuantity})
+                    
+                }else {
+                    OfStock.push( {id: doc.id, ...dataDoc} )
+                }
+            })
+        }).then(() => {
+            if (OfStock.length === 0){
+                const collectionRef = collection (db, 'orders')
+                
+                return addDoc(collectionRef, objetoOrden)
+             
+            }else {
+                return Promise.reject( { type: 'of_stock', products: OfStock })
+            }
+        }).then(( {id} ) => {
+            batch.commit()
+            notify (`La orden es: ${id}`)
+            
+            removeItem()
+        }).catch(error =>{
+            
+            if(error.type === 'out_of_stock'){
+        
+            }
+        })
+    
 }
 
     if(getQuantity() === 0) {
@@ -42,8 +77,8 @@ const Cart = () => {
     return (     
         <div>
            {cart.map(p => <CartItem  key={p.id} {...p}/>) }
-
-            <Button variant="primary" onClick={createOrden}>Generar Orden</Button>
+        
+         <Button variant="primary" onClick={createOrden}>Generar Orden</Button> 
         </div>
     )
 }

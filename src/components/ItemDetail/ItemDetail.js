@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import { useState, useContext } from "react"
 import { Link } from 'react-router-dom'
 import  CartContext  from '../../context/CartContext'
-
+import { useNotification } from '../../context/Notification'
 
 const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
     const [count, setCount] = useState(initial)
@@ -27,18 +27,21 @@ const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
             <Button variant="danger" onClick={decrement}>-</Button>
             <Button variant="success" onClick={increment}>+</Button>
             <Button onClick={() => onConfirm(count)}>Agregar al carrito</Button>
+            
         </div>
     )
 }
 
 const ItemDetail = ({ id, img, name, price, stock}) => {
     const [quantity, setQuantity] = useState(0)
-
+    const { notify } = useNotification()
     const { addItem } = useContext(CartContext)
+
 
     
     const onAdd = (quantity) => {
         setQuantity(quantity)
+        notify('Agregado con Éxito') 
         addItem({id, name, price, quantity})
     }
     

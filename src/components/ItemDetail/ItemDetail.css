@@ -5,25 +5,22 @@
 
 }
 .CardItem{
-    width: 75%;
+    width: 450px;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    display: flex;
+    display: block;
 }
 .CardItem2{
-    width: 75%;
+    width: 450px;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
-
-    display: flex;
-
+    display: block;
 }
-
 
 .price{
     font-size: 26px;
@@ -36,14 +33,10 @@
     color: var( --color-text);
 }
 .card-img{
-    width: 50%;
+    width: 200px;
     
 }
-.CardImg{
-    width: 60%;
-    margin: auto;
 
-}
 .BtnContador{
     width: 100%;
     display: flex;
