@@ -4,35 +4,50 @@ import CartItem from '../CartItem/CartItem'
 import './Cart.css'
 import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
 import { db } from "../../services/firebase"
+import { useState } from "react"
 import Button from "react-bootstrap/esm/Button"
 import { useNotification } from '../../context/Notification'
 
-
 const Cart = () => {
-    const { cart, getQuantity, getTotal, removeItem, order } = useContext(CartContext)  
+    const { cart, getQuantity, getTotal, removeItem } = useContext(CartContext)  
 
     const { notify } = useNotification()
+    const [order, setOrder] = useState({
+        name: '',
+        apellido: '',
+        email: ''
+    })
 
-    const createOrden = () => {
+    
+    const onSubmit = (data) =>{
+
+        setOrder({
+            name: data.nombre,
+            apellido: data.apellido,
+            email: data.email
+        })
+        createOrder()
+    }
+    const createOrder = () => {
         
         notify('Orden creada con Éxito')
-        const objetoOrden = {
+        const objOrder = {
             buyer: order,
-            items: cart ,
+            items: cart,
             total: getTotal()
         }
         
-    console.log(objetoOrden)
-
-    const ids = cart.map(prod => prod.id)
     
-    const batch = writeBatch (db)
+    
+        const ids = cart.map(prod => prod.id)
+    
+        const batch = writeBatch (db)
 
-    const OfStock = []
+        const OfStock = []
 
-    const collectionRef = collection(db, 'products')
+        const collectionRef = collection(db, 'products')
 
-    getDocs(query(collectionRef, where(documentId(), 'in', ids)))
+        getDocs(query(collectionRef, where(documentId(), 'in', ids)))
         .then(response => {
             response.docs.forEach(doc => {
                 const dataDoc = doc.data()
@@ -49,38 +64,35 @@ const Cart = () => {
             if (OfStock.length === 0){
                 const collectionRef = collection (db, 'orders')
                 
-                return addDoc(collectionRef, objetoOrden)
+                return addDoc(collectionRef, objOrder)
              
             }else {
                 return Promise.reject( { type: 'of_stock', products: OfStock })
             }
         }).then(( {id} ) => {
             batch.commit()
-            notify (`La orden es: ${id}`)
             
             removeItem()
+            notify(`el producto ${id}`)
         }).catch(error =>{
-            
+            console.log(objOrder)
             if(error.type === 'out_of_stock'){
-        
+                
             }
         })
     
-}
+    } 
+        if(getQuantity() === 0) {
+        return (<h1>Carrito de compras limpio</h1>)
+        }
 
-    if(getQuantity() === 0) {
-        return (
-            <h1>Carrito de compras limpio</h1>
-        )
-    }
-
-    return (     
+     return (     
         <div>
            {cart.map(p => <CartItem  key={p.id} {...p}/>) }
         
-         <Button variant="primary" onClick={createOrden}>Generar Orden</Button> 
+         <Button variant="primary" onClick={createOrder} >Generar Orden</Button> 
         </div>
     )
-}
 
+}
 export default Cart
