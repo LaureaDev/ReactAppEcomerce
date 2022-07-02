@@ -42,22 +42,18 @@
   margin-bottom: 15px;
 }
 .BTN{
-    margin: 28px 0 0 0;
-    width: 130px;
-    
-    display: inline-block;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-
-    background: #1fde82;
-    color: #fff;
-    padding: 12px 0;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 14px;
-    border-radius: 5px;
-    box-shadow: 0 8px 32px rgba(31, 222, 130, .46);
+  margin: 28px 0 0 0;
+  width: 130px;
+  display: inline-block;
+  background: #1fde82;
+  text-align: center;
+  color: #fff;
+  padding: 12px 0;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  border-radius: 5px;
+  box-shadow: 0 8px 32px rgba(31, 222, 130, .46);
 }
 .BTN:hover{
   color: #fff;

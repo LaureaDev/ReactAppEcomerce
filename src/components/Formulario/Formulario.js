@@ -1,10 +1,90 @@
 import React, { useState }from 'react';
 import './Formulario.css';
 import { Formik } from 'formik';
+import { useContext } from "react"
+import CartContext from '../../context/CartContext'
+import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
+import { db } from "../../services/firebase"
+import Button from 'react-bootstrap/esm/Button';
+import { useNotification } from '../../context/Notification'
+import Form from 'react-bootstrap/esm/Form';
 
 const Formulario = () => {
+    const { cart, getQuantity, getTotal, removeItem } = useContext(CartContext)  
+    const [formularioEnviado, setFormularioEnviado] = useState(false)
+    const { notify } = useNotification()
+    const [order, setOrder] = useState({
+        name: '',
+        apellido: '',
+        email: ''
+    })
+
+    const onSubmit = (data) =>{
+        <Button variant="primary" onClick={createOrder} >Generar Orden</Button>
+        setOrder({
+            name: data.nombre,
+            apellido: data.apellido,
+            email: data.email
+        })
+        createOrder()
+    }
     
-    const [formularioEnviado, setFormularioEnviado] = useState(false);
+    const createOrder = () => {
+        
+        notify('Orden creada con Éxito')
+        const objOrder = {
+            buyer: order,
+            items: cart,
+            total: getTotal()
+        }
+        
+        const ids = cart.map(prod => prod.id)
+    
+        const batch = writeBatch (db)
+
+        const OfStock = []
+
+        const collectionRef = collection(db, 'products')
+
+        getDocs(query(collectionRef, where(documentId(), 'in', ids)))
+        .then(response => {
+            response.docs.forEach(doc => {
+                const dataDoc = doc.data()
+                const prodQuantity = cart.find(prod => prod.id === doc.id)?.quantity
+
+                if( dataDoc.stock >= prodQuantity ){
+                    batch.update(doc.ref, { stock: dataDoc.stock - prodQuantity})
+                    
+                }else {
+                    OfStock.push( {id: doc.id, ...dataDoc} )
+                }
+            })
+        }).then(() => {
+            if (OfStock.length === 0){
+                const collectionRef = collection (db, 'orders')
+                
+                return addDoc(collectionRef, objOrder)
+             
+            }else {
+                return Promise.reject( { type: 'of_stock', products: OfStock })
+            }
+        }).then(( {id} ) => {
+            batch.commit()
+            
+            removeItem()
+            notify(`el producto ${id}`)
+        }).catch(error =>{
+            console.log(objOrder)
+            if(error.type === 'out_of_stock'){
+                
+            }
+        })
+    
+    } 
+        if(getQuantity() === 0) {
+         (<h1>Carrito de compras limpio</h1>)
+        }
+        
 	return (
         
         <Formik 
@@ -13,6 +93,7 @@ const Formulario = () => {
                 apellido: '',
                 email: ''
             }}
+            
             validate={(valores) => {
             const errors = {};
             //Nombres
@@ -46,11 +127,11 @@ const Formulario = () => {
                 setTimeout(() => setFormularioEnviado(false) ,3000);
             }}
         >
-        
+      
         { ( {errors, values, touched, handleSubmit, handleChange, handleBlur} ) => (
 
 
-            <form className='formulario' onSubmit={handleSubmit}> 
+            <Form className='formulario' onSubmit={handleSubmit (onSubmit)}> 
                 <div>
                     <label htmlFor="nombre">Nombre</label>
                     <input 
@@ -90,14 +171,14 @@ const Formulario = () => {
                     value={values.correo}
                     onChange={handleChange}
                     onBlur={handleBlur}
-
                     />
+                     
                      { touched.correo && errors.correo && <div className='error'>{errors.correo}</div>}
                 </div>
                 <button type="submit">Enviar</button>
 						{formularioEnviado && <p className="exito">Formulario enviado con exito!</p>}
-
-            </form>
+                       
+            </Form>
         )}
         
         </Formik>

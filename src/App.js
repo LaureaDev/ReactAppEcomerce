@@ -22,7 +22,7 @@ const  App = () => {
         <Route path='/category/:categoryId' element={<ItemListConteiner />}/>
         <Route path='/detail/:productosId' element= {<ItemDetailConteiner />}/>
         <Route path='/cart' element={<Cart />}/>
-        <Route path='/formulario' element={ <Formulario />} /> 
+        <Route path='/form' element={ <Formulario/> } /> 
       </Routes>
       </BrowserRouter>
       </NotificationProvider>

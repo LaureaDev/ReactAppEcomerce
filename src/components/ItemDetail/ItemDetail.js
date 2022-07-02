@@ -7,20 +7,17 @@ import  CartContext  from '../../context/CartContext'
 import { useNotification } from '../../context/Notification'
 
 const ButtonCount = ({ onConfirm, stock, initial = 1 }) => {
-    const [count, setCount] = useState(initial)
-
-    const increment = () => {
-        if(count < stock) {
-            setCount(count + 1)
+    const [count, setCount] = useState(initial);
+        function increment () {
+            if( count > stock) {
+                setCount(count + 1)
+            }
         }
-
-    }
-
-    const decrement = () => {
-            setCount(count - 1)
-
-    }
-
+        function decrement () {
+            if(count > stock) {
+                setCount(count - 1)
+            }
+        } 
     return (
         <div className='BtnContador'>
             <p className='cantidad'>{count}</p>

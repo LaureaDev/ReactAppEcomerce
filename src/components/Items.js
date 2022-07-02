@@ -11,7 +11,7 @@ function Items({img, name, id, price }) {
        $ {price}
     </Card.Text>
   </Card.Body>
-  <div>
+  <div className='VerDetalle'>
   <Link to={`/detail/${id}`} className='BTN'> Ver detalles</Link>
   </div>
 </Card>
