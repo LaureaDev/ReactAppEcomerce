@@ -3,8 +3,10 @@ import './Formulario.css';
 import { Formik } from 'formik';
 
 const Formulario = () => {
+    
     const [formularioEnviado, setFormularioEnviado] = useState(false);
 	return (
+        
         <Formik 
             initialValues={{
                 nombre: '',
@@ -37,8 +39,8 @@ const Formulario = () => {
             return errors;
             }}
 
-                onSubmit={({resetForm}) => {
-                resetForm();
+                onSubmit={({onSubmit}) => {
+                    onSubmit();
                 setFormularioEnviado (true);
 
                 setTimeout(() => setFormularioEnviado(false) ,3000);
@@ -46,6 +48,8 @@ const Formulario = () => {
         >
         
         { ( {errors, values, touched, handleSubmit, handleChange, handleBlur} ) => (
+
+
             <form className='formulario' onSubmit={handleSubmit}> 
                 <div>
                     <label htmlFor="nombre">Nombre</label>
